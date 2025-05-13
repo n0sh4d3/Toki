@@ -10,6 +10,7 @@
             "includePath": [
                 "/Users/n0_sh4d3/Toki/include",
                 "/Users/n0_sh4d3/Toki/src",
+                "/Users/n0_sh4d3/Toki/.pio/libdeps/m5stick-c/IRremoteESP8266/src",
                 "/Users/n0_sh4d3/Toki/.pio/libdeps/m5stick-c/M5StickCPlus2/src",
                 "/Users/n0_sh4d3/Toki/.pio/libdeps/m5stick-c/DFRobot_GP8XXX",
                 "/Users/n0_sh4d3/Toki/.pio/libdeps/m5stick-c/M5Family/src",
@@ -251,6 +252,7 @@
                 "path": [
                     "/Users/n0_sh4d3/Toki/include",
                     "/Users/n0_sh4d3/Toki/src",
+                    "/Users/n0_sh4d3/Toki/.pio/libdeps/m5stick-c/IRremoteESP8266/src",
                     "/Users/n0_sh4d3/Toki/.pio/libdeps/m5stick-c/M5StickCPlus2/src",
                     "/Users/n0_sh4d3/Toki/.pio/libdeps/m5stick-c/DFRobot_GP8XXX",
                     "/Users/n0_sh4d3/Toki/.pio/libdeps/m5stick-c/M5Family/src",

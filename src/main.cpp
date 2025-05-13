@@ -1,13 +1,14 @@
 #include <M5StickCPlus2.h>
 
+const char* TV_BE_GONE = "TV BE GONE";
 const char* menuItems[] = {
-  "IR",
-  "WIFI", 
-  "BT",
-  "cwlee",
-  "jebane"
+  TV_BE_GONE,
+  "WIFI",
+  "more",
+  "shit",
+  "bruh",
 };
-const int MENU_ITEM_COUNT = 5;
+const int MENU_ITEM_COUNT = 5; // Changed to match actual array size
 
 int currentMenuIndex = 0;
 bool inMenu = true;
@@ -17,17 +18,15 @@ void drawBatteryPercentage() {
   
   if (batteryLevel > 80) {
     M5.Lcd.setTextColor(GREEN, BLACK);
-    M5.Lcd.setTextSize(2);
   }
   else if (batteryLevel >= 50 && batteryLevel <= 80) {
     M5.Lcd.setTextColor(YELLOW, BLACK);
-    M5.Lcd.setTextSize(2);
   }
   else {
     M5.Lcd.setTextColor(RED, BLACK);
-    M5.Lcd.setTextSize(2);
   }
   
+  M5.Lcd.setTextSize(2);
   M5.Lcd.setCursor(M5.Lcd.width() - 50, 0);
   M5.Lcd.print(batteryLevel);
   M5.Lcd.print("%");
@@ -58,7 +57,7 @@ void drawMenu() {
 
 void setup() {
   M5.begin();
-  M5.Lcd.setRotation(1);  
+  M5.Lcd.setRotation(3);  
   drawMenu();
 }
 
@@ -66,28 +65,44 @@ void loop() {
   M5.update();
   
   if (M5.BtnPWR.wasPressed()) {
-    if (currentMenuIndex > 0) {
+    if (currentMenuIndex == 0) {
+      currentMenuIndex = MENU_ITEM_COUNT - 1; 
+    } else {
       currentMenuIndex--;
-      drawMenu();
     }
+    drawMenu();
   }
-  
+
   if (M5.BtnB.wasPressed()) {
-    if (currentMenuIndex < MENU_ITEM_COUNT - 1) {
+    if (currentMenuIndex >= MENU_ITEM_COUNT - 1) {
+      currentMenuIndex = 0; 
+    } else {
       currentMenuIndex++;
-      drawMenu();
     }
+    drawMenu();
   }
   
   if (M5.BtnA.wasPressed()) {
     M5.Lcd.fillScreen(BLACK);
     M5.Lcd.setCursor(10, 30);
     M5.Lcd.setTextColor(PURPLE);
-    M5.Lcd.println("wybranko: ");
-    M5.Lcd.println(menuItems[currentMenuIndex]);
-    delay(2000);  // Show selection for 2 seconds
-    drawMenu();
+    if (menuItems[currentMenuIndex] == TV_BE_GONE){
+      M5.Lcd.println("tv be gooning :3");
+    } else {
+      M5.Lcd.println("  choice: ");
+      M5.Lcd.println(menuItems[currentMenuIndex]);
+    }
+    
+    bool waitingForReturn = true;
+    while (waitingForReturn) {
+      M5.update();
+      if (M5.BtnPWR.wasPressed()){
+        waitingForReturn = false;
+        drawMenu(); // go back fella
+      }
+      delay(50);
+    }
   }
   
-  delay(50);  // Small delay to prevent rapid updates
+  delay(50);  
 }
